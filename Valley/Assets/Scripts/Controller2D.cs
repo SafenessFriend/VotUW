@@ -14,20 +14,22 @@ public class Controller2D : MonoBehaviour {
     float horizontalRaySpacing;
     float verticalRaySpacing;
 
-    BoxCollider2D collider;
+    BoxCollider2D boxCol;
+    SpriteRenderer sprite;
     RaycastOrigins raycastOrigins;
     public CollisionInfo collisions;
 
 	void Start ()
     {
-        collider = GetComponent<BoxCollider2D>();
+        boxCol = GetComponent<BoxCollider2D>();
+        sprite = GetComponent<SpriteRenderer>();
         CalculateRaySpacing();
 
     }
 
     private void Update()
     {
-
+        RescaleToSprite();
 
     }
 
@@ -99,7 +101,7 @@ public class Controller2D : MonoBehaviour {
 
     void UpdateRaycastOrigins()
     {
-        Bounds bounds = collider.bounds;
+        Bounds bounds = boxCol.bounds;
         bounds.Expand(skinWidth * -2);
 
         raycastOrigins.bottomLeft = new Vector2(bounds.min.x, bounds.min.y);
@@ -111,7 +113,7 @@ public class Controller2D : MonoBehaviour {
 
     void CalculateRaySpacing()
     {
-        Bounds bounds = collider.bounds;
+        Bounds bounds = boxCol.bounds;
         bounds.Expand(skinWidth * -2);
 
         horizontalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue);
@@ -119,6 +121,11 @@ public class Controller2D : MonoBehaviour {
 
         horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
         verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
+    }
+
+    public void RescaleToSprite()
+    {
+        boxCol.size = sprite.bounds.size;
     }
 
     struct RaycastOrigins
