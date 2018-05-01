@@ -42,7 +42,6 @@ public class Player : MonoBehaviour {
             anim.SetBool("grounded", false);
         }
 
-
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.below)
