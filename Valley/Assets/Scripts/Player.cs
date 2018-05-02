@@ -12,7 +12,7 @@ public class Player : MonoBehaviour {
     float gravity;
     float jumpVelocity;
     Vector3 velocity;
-
+    
     Controller2D controller;
 
     Animator anim;

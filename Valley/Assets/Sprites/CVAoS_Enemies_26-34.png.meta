@@ -1,4 +1,5 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: f787464c27097ae41b8f92966db61205
 timeCreated: 1525239417
 licenseType: Free
@@ -245,6 +246,14 @@ TextureImporter:
     21300476: CVAoS_Enemies_26-34_238
     21300478: CVAoS_Enemies_26-34_239
     21300480: CVAoS_Enemies_26-34_240
+=======
+guid: 53504c0f1088535499c42530a3da3b77
+timeCreated: 1525227686
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName: {}
+  externalObjects: {}
+>>>>>>> 2097a195dd151d2cd867167a32e36b813f181b28
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -280,13 +289,23 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
+<<<<<<< HEAD
   spriteMode: 2
+=======
+  spriteMode: 1
+>>>>>>> 2097a195dd151d2cd867167a32e36b813f181b28
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+=======
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+>>>>>>> 2097a195dd151d2cd867167a32e36b813f181b28
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -298,12 +317,17 @@ TextureImporter:
   platformSettings:
   - buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
+<<<<<<< HEAD
+=======
+    resizeAlgorithm: 0
+>>>>>>> 2097a195dd151d2cd867167a32e36b813f181b28
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+<<<<<<< HEAD
   - buildTarget: Standalone
     maxTextureSize: 2048
     textureFormat: -1
@@ -3713,6 +3737,12 @@ TextureImporter:
       outline: []
       physicsShape: []
       tessellationDetail: 0
+=======
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites: []
+>>>>>>> 2097a195dd151d2cd867167a32e36b813f181b28
     outline: []
     physicsShape: []
   spritePackingTag: 
