@@ -31,8 +31,7 @@ public class Controller2D : MonoBehaviour {
 
     private void Update()
     {
-        RescaleToSprite();
-
+        //RescaleToSprite();
     }
 
     public void Move(Vector3 velocity)
@@ -167,10 +166,10 @@ public class Controller2D : MonoBehaviour {
         verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
     }
 
-    public void RescaleToSprite()
-    {
-        boxCol.size = sprite.bounds.size;
-    }
+    //public void RescaleToSprite()
+    //{
+    //    boxCol.size = sprite.bounds.size;
+    //}
 
     struct RaycastOrigins
     {

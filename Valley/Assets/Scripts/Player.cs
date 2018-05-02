@@ -5,9 +5,9 @@ using UnityEngine;
 [RequireComponent (typeof(Controller2D)) ]
 public class Player : MonoBehaviour {
 
-    public float jumpHeight = 4;
+    public float jumpHeight = 2;
     public float timeToJumpApex = 0.4f;
-    public float moveSpeed = 6f;
+    public float moveSpeed = 4f;
         
     float gravity;
     float jumpVelocity;
@@ -49,6 +49,7 @@ public class Player : MonoBehaviour {
             velocity.y = jumpVelocity;
             anim.SetTrigger("jump");
         }
+
         velocity.x = input.x * moveSpeed;
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
