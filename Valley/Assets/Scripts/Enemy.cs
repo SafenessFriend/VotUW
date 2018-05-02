@@ -36,17 +36,39 @@ public class Enemy : MonoBehaviour {
             velocity.y = 0;
         }
 
+        if (Vector3.Distance(transform.position, target.position) > 0.1f && Vector3.Distance(transform.position, target.position) < 2.5f)
+        {
+            if (target.transform.position.x > transform.position.x)
+            {
+                velocity.x = moveSpeed;
+                anim.SetBool("right", true);
+                anim.SetBool("left", false);
 
-        ////move towards the player
-        //if (Vector3.Distance(transform.position, target.position) > 0.1f)
-        //{//move if distance from target is greater than 1
-        //    transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
-        //}
+            }
+            else if (target.transform.position.x < transform.position.x)
+            {
+                velocity.x = -moveSpeed;
+                anim.SetBool("left", true);
+                anim.SetBool("right", false);
 
-        velocity = new Vector3((transform.position.x - target.transform.position.x) * moveSpeed, (transform.position.y - target.transform.position.y) * moveSpeed);
-        GetComponent<Rigidbody2D>().velocity = -velocity;
+            }
+        }
+        else
+        {
+            velocity.x = 0;
+        }
 
+        if (Vector3.Distance(transform.position, target.position) < 0.3f)
+        {
+            
+            anim.SetBool("attack", true);
+            velocity.x = 0;
 
+        }
+        else if (Vector3.Distance(transform.position, target.position) > 1f)
+        {
+            anim.SetBool("attack", false);
+        }
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
