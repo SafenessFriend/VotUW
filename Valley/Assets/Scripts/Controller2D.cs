@@ -166,19 +166,10 @@ public class Controller2D : MonoBehaviour {
         verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
     }
 
-<<<<<<< HEAD
     //public void RescaleToSprite()
     //{
     //    boxCol.size = sprite.bounds.size;
     //}
-=======
-    public void RescaleToSprite()
-    {
-      //boxCol.size = sprite.bounds.size;
-    	// only update player X value so camera is not bouncing. HACK CODE REFINE
-      // boxCol.size = new Vector2(sprite.bounds.size.x, boxCol.size.y); 
-    }
->>>>>>> 2097a195dd151d2cd867167a32e36b813f181b28
 
     struct RaycastOrigins
     {
