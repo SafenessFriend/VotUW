@@ -968,7 +968,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObj: {fileID: 805350886}
-  cameraPosition: {x: 0, y: 0, z: 0}
+  smoothTimeX: 0.2
+  smoothTimeY: 0.2
+  cameraOffset: {x: 0, y: 0, z: -1}
+  focusX: 1
+  focusYAbove: 0.5
+  focusYBelow: 0.5
+  drawFocus: 1
 --- !u!1 &805350886
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,9 +1006,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c87fb5581bc7941ada8717a9624583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 2
-  timeToJumpApex: 0.4
-  moveSpeed: 4
+  jumpHeight: 1.5
+  timeToJumpApex: 0.5
+  moveSpeed: 3
 --- !u!114 &805350888
 MonoBehaviour:
   m_ObjectHideFlags: 0
