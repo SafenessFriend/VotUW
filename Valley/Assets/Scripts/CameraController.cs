@@ -6,11 +6,11 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 
     // game object for camera to follow
-    public GameObject targetObj;
+    GameObject targetObj;
 
 
     /** SMOOTHING VARIABLES **/
-
+    public bool smoothOn = true;
     // smooth delay for x & y
     public float smoothTimeX = 0.2f;
     public float smoothTimeY = 0.2f;
@@ -36,8 +36,12 @@ public class CameraController : MonoBehaviour {
     // set draw focus lines
     public bool drawFocus = true;
 
+    // camera lock offset
+    public float cameraLockOffset = 2f;
+
     // Use this for initialization
     void Start () {
+        targetObj = GameObject.FindWithTag("Player");
         transform.position = targetObj.transform.position + cameraOffset;
     }
 	
@@ -54,52 +58,82 @@ public class CameraController : MonoBehaviour {
             if (isCenteredX == true)
             {
                 isCenteredX = false;
-                //Debug.Log("OUTSIDE OF FOCUS");
+            }
+        }
+
+        
+        if (smoothOn)
+        {
+            // check if centered
+            if (isCenteredX == false)
+            {
+                // get smooth follow position for x axis
+                posX = Mathf.SmoothDamp(transform.position.x, desiredPosition.x, ref velocity.x, smoothTimeX);
+                // if camera is centered on player, isCentered is true
+                if (System.Math.Round(desiredPosition.x, 1) == System.Math.Round(posX, 1))
+                {
+                    //Debug.Log("CENTERED: " + "targetx: " + desiredPosition.x + "posX: " + posX );
+                    isCenteredX = true;
+                }
             }
 
+            // get smooth follow position for y axis
+            posY = Mathf.SmoothDamp(transform.position.y, desiredPosition.y, ref velocity.y, smoothTimeY);
         }
-
-        // check if centered
-        if (isCenteredX == false)
+        else
         {
-            // get smooth follow position for x axis
-            posX = Mathf.SmoothDamp(transform.position.x, desiredPosition.x, ref velocity.x, smoothTimeX);
-            // if camera is centered on player, isCentered is true
-            if (System.Math.Round(desiredPosition.x, 1) == System.Math.Round(posX, 1))
-            {
-                //Debug.Log("CENTERED: " + "targetx: " + desiredPosition.x + "posX: " + posX );
-                isCenteredX = true;
-            } 
+            // follow player without smoothing
+            posX = desiredPosition.x;
+            posY = desiredPosition.y;
+        }
+
+
+        // find active boundary (that player is inside)
+        GameObject boundary = GameObject.Find("Boundary");
+        if (boundary)
+        {
+            float offset = Camera.main.aspect * Camera.main.orthographicSize;
+            // keep camera position inside the boundary
+            posX = Mathf.Clamp(posX, boundary.GetComponent<BoxCollider2D>().bounds.min.x + offset, boundary.GetComponent<BoxCollider2D>().bounds.max.x - offset);
+            posY = Mathf.Clamp(posY, boundary.GetComponent<BoxCollider2D>().bounds.min.y, boundary.GetComponent<BoxCollider2D>().bounds.max.y);
         }
 
 
 
-        // get smooth follow position for y axis
-        posY = Mathf.SmoothDamp(transform.position.y, desiredPosition.y, ref velocity.y, smoothTimeY);
         // update position
         transform.position = new Vector3(posX, posY, transform.position.z);
 
-        
+      
 
 
+        // DRAW FOCUS DEBUG
         if (drawFocus){
-            // draw camera focus lines
-            // x focus
-            Vector3 start = new Vector3(posX - cameraOffset.x + focusX, posY * 100, 0);
-            Vector3 end = new Vector3(posX - cameraOffset.x + focusX, posY * -100, 0);
-            Debug.DrawLine(start, end, Color.yellow);
-            start = new Vector3(posX - cameraOffset.x - focusX, posY * 100, 0);
-            end = new Vector3(posX - cameraOffset.x - focusX, posY * -100, 0);
-            Debug.DrawLine(start, end, Color.yellow);
-            // y focus
-            start = new Vector3(posX * 100, posY + cameraOffset.y + focusYAbove, 0);
-            end = new Vector3(posX * -100, posY + cameraOffset.y + focusYAbove, 0);
-            Debug.DrawLine(start, end, Color.red);
-            start = new Vector3(posX * 100, posY + cameraOffset.y - focusYBelow, 0);
-            end = new Vector3(posX * - 100, posY + cameraOffset.y - focusYBelow, 0);
-            Debug.DrawLine(start, end, Color.red);
+            DrawFocus(posX, posY);
         }
 
 
+    }
+
+
+
+
+
+    void DrawFocus (float x, float y)
+    {
+        // draw camera focus lines
+        // x focus
+        Vector3 start = new Vector3(x - cameraOffset.x + focusX, y * 100, 0);
+        Vector3 end = new Vector3(x - cameraOffset.x + focusX, y * -100, 0);
+        Debug.DrawLine(start, end, Color.yellow);
+        start = new Vector3(x - cameraOffset.x - focusX, y * 100, 0);
+        end = new Vector3(x - cameraOffset.x - focusX, y * -100, 0);
+        Debug.DrawLine(start, end, Color.yellow);
+        // y focus
+        start = new Vector3(x * 100, y + cameraOffset.y + focusYAbove, 0);
+        end = new Vector3(x * -100, y + cameraOffset.y + focusYAbove, 0);
+        Debug.DrawLine(start, end, Color.red);
+        start = new Vector3(x * 100, y + cameraOffset.y - focusYBelow, 0);
+        end = new Vector3(x * -100, y + cameraOffset.y - focusYBelow, 0);
+        Debug.DrawLine(start, end, Color.red);
     }
 }
